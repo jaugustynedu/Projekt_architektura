@@ -1,0 +1,119 @@
+﻿<Window x:Class="Projekt_architektura.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Projekt_architektura"
+        mc:Ignorable="d" FontSize="18"
+        Title="Symulator" Height="720" Width="1280">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="60"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="60"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="20"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="20"/>
+        </Grid.RowDefinitions>
+
+        <!-- Podawana zawartość rejestrów -->
+        <TextBlock Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="3" Margin="20 10" FontSize="20" Text="Podaj zawartość rejestrów:"/>
+
+        <TextBlock Grid.Column="1" Grid.Row="3" Text="Reg" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
+        <TextBlock Grid.Column="2" Grid.Row="3" Text="High" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
+        <TextBlock Grid.Column="3" Grid.Row="3" Text="Low" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
+
+        <TextBlock Grid.Column="1" Grid.Row="4" Text="A" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
+        <TextBox x:Name="AH" Grid.Column="2" Grid.Row="4" MaxLength="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="AliceBlue" Width="35" Height="35" Margin="10"/>
+        <TextBox x:Name="AL" Grid.Column="3" Grid.Row="4" Text="" MaxLength="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="AliceBlue" Width="35" Height="35" Margin="10"/>
+
+        <TextBlock Grid.Column="1" Grid.Row="5" Text="B" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
+        <TextBox x:Name="BH" Grid.Column="2" Grid.Row="5" Text="" MaxLength="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="AliceBlue" Width="35" Height="35" Margin="10"/>
+        <TextBox x:Name="BL" Grid.Column="3" Grid.Row="5" Text="" MaxLength="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="AliceBlue" Width="35" Height="35" Margin="10"/>
+
+        <TextBlock Grid.Column="1" Grid.Row="6" Text="C" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
+        <TextBox x:Name="CH" Grid.Column="2" Grid.Row="6" Text="" MaxLength="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="AliceBlue" Width="35" Height="35" Margin="10"/>
+        <TextBox x:Name="CL" Grid.Column="3" Grid.Row="6" Text="" MaxLength="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="AliceBlue" Width="35" Height="35" Margin="10"/>
+
+        <TextBlock Grid.Column="1" Grid.Row="7" Text="D" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
+        <TextBox x:Name="DH" Grid.Column="2" Grid.Row="7" Text="" MaxLength="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="AliceBlue" Width="35" Height="35" Margin="10"/>
+        <TextBox x:Name="DL" Grid.Column="3" Grid.Row="7" Text="" MaxLength="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="AliceBlue" Width="35" Height="35" Margin="10"/>
+
+        <Button x:Name="MOVALL" Grid.Column="1" Grid.Row="8" Grid.ColumnSpan="3" Content="MOV ALL" Click="MOVALL_Operation" Width="100" Height="35" Margin="15"/>
+
+        <!-- Przerywnik -->
+        <Rectangle Grid.Column="4" Grid.Row="1" Grid.RowSpan="8" Fill="Teal" Margin="25 10 25 10"/>
+
+        <!-- Operacje -->
+        <TextBlock Grid.Column="5" Grid.Row="1" Grid.ColumnSpan="3" Text="Wybierz rejestry:" FontSize="20" Margin="20 10"/>
+        <ComboBox x:Name="firstRegisterList" Grid.Column="5" Grid.Row="3" Width="80" Height="35">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock x:Name="firstRegister" Text="{Binding OneRegister}"/> 
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+        <ComboBox x:Name="secondRegisterList" Grid.Column="6" Grid.Row="3" Width="80" Height="35">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock x:Name="secondRegister" Text="{Binding OneRegister}"/>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+
+        <TextBlock Grid.Column="5" Grid.Row="5" Grid.ColumnSpan="3" Text="Wybierz operacje:" FontSize="20" Width="200px" Margin="20 10"/>
+        <Button x:Name="MOV" Grid.Column="5" Grid.Row="6" Content="MOV" Click="MOV_Operation" Width="55" Height="35"/>
+        <Button x:Name="XCHG" Grid.Column="6" Grid.Row="6" Content="XCHG" Click="XCHG_Operation" Width="55" Height="35"/>
+
+        <!-- Przerywnik -->
+        <Rectangle Grid.Column="8" Grid.Row="1" Grid.RowSpan="8" Fill="Teal" Margin="25 10 25 10"/>
+
+        <!-- Wyniki rejestrów -->
+        <TextBlock Grid.Column="9" Grid.Row="1" Grid.ColumnSpan="3" Margin="50 10 100 10" FontSize="20" Text="Wynik:"/>
+
+        <TextBlock Grid.Column="9" Grid.Row="3" Text="Reg" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
+        <TextBlock Grid.Column="10" Grid.Row="3" Text="High" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
+        <TextBlock Grid.Column="11" Grid.Row="3" Text="Low" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
+
+        <TextBlock Grid.Column="9" Grid.Row="4" Text="A" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
+        <TextBlock x:Name="resultAH" Grid.Column="10" Grid.Row="4" Text="00" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <TextBlock x:Name="resultAL" Grid.Column="11" Grid.Row="4" Text="00" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+
+        <TextBlock Grid.Column="9" Grid.Row="5" Text="B" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
+        <TextBlock x:Name="resultBH" Grid.Column="10" Grid.Row="5" Text="00" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <TextBlock x:Name="resultBL" Grid.Column="11" Grid.Row="5" Text="00" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+
+        <TextBlock Grid.Column="9" Grid.Row="6" Text="C" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
+        <TextBlock x:Name="resultCH" Grid.Column="10" Grid.Row="6" Text="00" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <TextBlock x:Name="resultCL" Grid.Column="11" Grid.Row="6" Text="00" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+
+        <TextBlock Grid.Column="9" Grid.Row="7" Text="D" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
+        <TextBlock x:Name="resultDH" Grid.Column="10" Grid.Row="7" Text="00" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <TextBlock x:Name="resultDL" Grid.Column="11" Grid.Row="7" Text="00" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+
+    </Grid>
+</Window>
