@@ -49,17 +49,30 @@ namespace Projekt_architektura
         private void MOV_Operation(object sender, RoutedEventArgs e)
         {
             Register firstReg = (Register)firstRegisterList.SelectedItem;
-            Register lastReg = (Register)secondRegisterList.SelectedItem;
+            Register secondReg = (Register)secondRegisterList.SelectedItem;
 
             object input = FindName("result"+firstReg.Name);
             TextBlock inputChild = input as TextBlock;
-            inputChild.Text = lastReg.Value;
+            inputChild.Text = secondReg.Value;
 
-            firstReg.Value = lastReg.Value;
-            MessageBox.Show(firstReg.Name + " value changed to " + lastReg.Value);
+            firstReg.Value = secondReg.Value;
         }
         private void XCHG_Operation(object sender, RoutedEventArgs e)
         {
+            Register firstReg = (Register)firstRegisterList.SelectedItem;
+            Register secondReg = (Register)secondRegisterList.SelectedItem;
+
+            object firstOutput = FindName("result" + firstReg.Name);
+            object secondOutput = FindName("result" + secondReg.Name);
+            TextBlock firstOutputChild = firstOutput as TextBlock;
+            TextBlock secondOutputChild = secondOutput as TextBlock;
+
+            string temp = firstReg.Value;
+            firstOutputChild.Text = secondReg.Value;
+            secondOutputChild.Text = temp;
+
+            firstReg.Value = secondReg.Value;
+            secondReg.Value = temp;
 
         }
         private void MOVALL_Operation(object sender, RoutedEventArgs e)
@@ -89,8 +102,6 @@ namespace Projekt_architektura
                     }
                     else
                     {
-                        //MessageBox.Show("Register " + reg.OneRegister + " has wrong value. Please enter hexadecimal code");
-                        //inputChild.Text = "";
                         inputChild.BorderBrush = System.Windows.Media.Brushes.Red;
                         inputChild.BorderThickness = new System.Windows.Thickness(1.5);
                     }
