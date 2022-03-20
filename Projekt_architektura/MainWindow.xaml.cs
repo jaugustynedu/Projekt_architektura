@@ -27,14 +27,14 @@ namespace Projekt_architektura
         {
             InitializeComponent();
 
-            registers.Add(new Register { OneRegister = "AH", Value = "00" });
-            registers.Add(new Register { OneRegister = "BH", Value = "00" });
-            registers.Add(new Register { OneRegister = "CH", Value = "00" });
-            registers.Add(new Register { OneRegister = "DH", Value = "00" });
-            registers.Add(new Register { OneRegister = "AL", Value = "00" });
-            registers.Add(new Register { OneRegister = "BL", Value = "00" });
-            registers.Add(new Register { OneRegister = "CL", Value = "00" });
-            registers.Add(new Register { OneRegister = "DL", Value = "00" });
+            registers.Add(new Register { Name = "AH", Value = "00" });
+            registers.Add(new Register { Name = "BH", Value = "00" });
+            registers.Add(new Register { Name = "CH", Value = "00" });
+            registers.Add(new Register { Name = "DH", Value = "00" });
+            registers.Add(new Register { Name = "AL", Value = "00" });
+            registers.Add(new Register { Name = "BL", Value = "00" });
+            registers.Add(new Register { Name = "CL", Value = "00" });
+            registers.Add(new Register { Name = "DL", Value = "00" });
 
             firstRegisterList.ItemsSource = registers;
             secondRegisterList.ItemsSource = registers;
@@ -48,7 +48,15 @@ namespace Projekt_architektura
 
         private void MOV_Operation(object sender, RoutedEventArgs e)
         {
+            Register firstReg = (Register)firstRegisterList.SelectedItem;
+            Register lastReg = (Register)secondRegisterList.SelectedItem;
 
+            object input = FindName("result"+firstReg.Name);
+            TextBlock inputChild = input as TextBlock;
+            inputChild.Text = lastReg.Value;
+
+            firstReg.Value = lastReg.Value;
+            MessageBox.Show(firstReg.Name + " value changed to " + lastReg.Value);
         }
         private void XCHG_Operation(object sender, RoutedEventArgs e)
         {
@@ -58,10 +66,10 @@ namespace Projekt_architektura
         {
             foreach (var reg in registers)
             {
-                object input = FindName(reg.OneRegister);
+                object input = FindName(reg.Name);
                 TextBox inputChild = input as TextBox;
 
-                object output = FindName("result" + reg.OneRegister);
+                object output = FindName("result" + reg.Name);
                 TextBlock outputChild = output as TextBlock;
                 
                 if (!String.IsNullOrWhiteSpace(inputChild.Text))
@@ -94,11 +102,22 @@ namespace Projekt_architektura
 
             }
         }
+        public void CLEAR_Operation(object sender, RoutedEventArgs e)
+        {
+            foreach(var reg in registers)
+            {
+                object input = FindName(reg.Name);
+                TextBox inputChild = input as TextBox;
+                inputChild.Text = "";
+                inputChild.ClearValue(Border.BorderBrushProperty);
+                inputChild.ClearValue(Border.BorderThicknessProperty);
+            }
+        }
     }
 
     public class Register
     {
-        public string OneRegister { get; set; }
+        public string Name { get; set; }
         public string Value { get; set; }
 
         public static bool HexValidator(string input)
