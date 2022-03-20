@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Projekt_architektura"
         mc:Ignorable="d" FontSize="18"
-        Title="Symulator" Height="720" Width="1280">
+        Title="Symulator INTEL 8086" Height="720" Width="1280">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20"/>

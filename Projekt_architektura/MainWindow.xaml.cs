@@ -40,39 +40,47 @@ namespace Projekt_architektura
             secondRegisterList.ItemsSource = registers;
         }
 
-        private void Button_Registry(object sender, RoutedEventArgs e)
-        {
-            string content = (sender as Button).Content.ToString();
-            
-        }
-
         private void MOV_Operation(object sender, RoutedEventArgs e)
         {
             Register firstReg = (Register)firstRegisterList.SelectedItem;
             Register secondReg = (Register)secondRegisterList.SelectedItem;
 
-            object input = FindName("result"+firstReg.Name);
-            TextBlock inputChild = input as TextBlock;
-            inputChild.Text = secondReg.Value;
+            if(firstReg != null && secondReg != null)
+            {
+                object input = FindName("result" + firstReg.Name);
+                TextBlock inputChild = input as TextBlock;
+                inputChild.Text = secondReg.Value;
 
-            firstReg.Value = secondReg.Value;
+                firstReg.Value = secondReg.Value;
+            }
+            else
+            {
+                MessageBox.Show("Wybierz oba rejestry!");
+            }
         }
         private void XCHG_Operation(object sender, RoutedEventArgs e)
         {
             Register firstReg = (Register)firstRegisterList.SelectedItem;
             Register secondReg = (Register)secondRegisterList.SelectedItem;
 
-            object firstOutput = FindName("result" + firstReg.Name);
-            object secondOutput = FindName("result" + secondReg.Name);
-            TextBlock firstOutputChild = firstOutput as TextBlock;
-            TextBlock secondOutputChild = secondOutput as TextBlock;
+            if (firstReg != null && secondReg != null)
+            {
+                object firstOutput = FindName("result" + firstReg.Name);
+                object secondOutput = FindName("result" + secondReg.Name);
+                TextBlock firstOutputChild = firstOutput as TextBlock;
+                TextBlock secondOutputChild = secondOutput as TextBlock;
 
-            string temp = firstReg.Value;
-            firstOutputChild.Text = secondReg.Value;
-            secondOutputChild.Text = temp;
+                string temp = firstReg.Value;
+                firstOutputChild.Text = secondReg.Value;
+                secondOutputChild.Text = temp;
 
-            firstReg.Value = secondReg.Value;
-            secondReg.Value = temp;
+                firstReg.Value = secondReg.Value;
+                secondReg.Value = temp;
+            }
+            else
+            {
+                MessageBox.Show("Wybierz oba rejestry!");
+            }
 
         }
         private void MOVALL_Operation(object sender, RoutedEventArgs e)
