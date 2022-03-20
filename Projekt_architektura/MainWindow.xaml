@@ -63,8 +63,9 @@
         <TextBox x:Name="DH" Grid.Column="2" Grid.Row="7" Text="" MaxLength="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="AliceBlue" Width="35" Height="35" Margin="10"/>
         <TextBox x:Name="DL" Grid.Column="3" Grid.Row="7" Text="" MaxLength="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="AliceBlue" Width="35" Height="35" Margin="10"/>
 
-        <Button x:Name="MOVALL" Grid.Column="1" Grid.Row="8" Grid.ColumnSpan="3" Content="MOV ALL" Click="MOVALL_Operation" Width="100" Height="35" Margin="15"/>
-        <Button x:Name="CLEAR" Grid.Column="1" Grid.Row="9" Grid.ColumnSpan="3" Content="CLEAR" Click="CLEAR_Operation" Width="100" Height="35" Margin="15"/>
+        <Button x:Name="MOVALL" Grid.Column="1" Grid.Row="8" Grid.ColumnSpan="3" Content="Mov All" Click="MOVALL_Operation" Width="100" Height="35" Margin="15"/>
+        <Button x:Name="CLEAR" Grid.Column="1" Grid.Row="9" Grid.ColumnSpan="3" Content="Clear" Click="CLEAR_Operation" Width="100" Height="35" Margin="15"/>
+        <Button x:Name="RANDOM" Grid.Column="1" Grid.Row="10" Grid.ColumnSpan="3" Content="Random" Click="RANDOM_Operation" Width="100" Height="35" Margin="15"/>
 
         <!-- Przerywnik -->
         <Rectangle Grid.Column="4" Grid.Row="1" Grid.RowSpan="8" Fill="Teal" Margin="25 10 25 10"/>

@@ -113,6 +113,17 @@ namespace Projekt_architektura
                 inputChild.ClearValue(Border.BorderThicknessProperty);
             }
         }
+        public void RANDOM_Operation(object sender, RoutedEventArgs e)
+        {
+            foreach (var reg in registers)
+            {
+                object input = FindName(reg.Name);
+                TextBox inputChild = input as TextBox;
+                inputChild.ClearValue(Border.BorderBrushProperty);
+                inputChild.ClearValue(Border.BorderThicknessProperty);
+                inputChild.Text = Register.RandomHexGenerator();
+            }
+        }
     }
 
     public class Register
@@ -130,6 +141,12 @@ namespace Projekt_architektura
                 }
             }
             return true;
+        }
+        public static string RandomHexGenerator()
+        {
+            const string chars = "0123456789ABCDEF";
+            var rand = new Random();
+            return new string(Enumerable.Repeat(chars, 2).Select(s => s[rand.Next(s.Length)]).ToArray());
         }
     }
 }
