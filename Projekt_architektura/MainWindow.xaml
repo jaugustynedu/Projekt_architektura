@@ -36,6 +36,8 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
@@ -68,9 +70,9 @@
         <Button x:Name="RANDOM" Grid.Column="1" Grid.Row="10" Grid.ColumnSpan="3" Content="Random" Click="RANDOM_Operation" Width="100" Height="35" Margin="15"/>
 
         <!-- Przerywnik -->
-        <Rectangle Grid.Column="4" Grid.Row="1" Grid.RowSpan="8" Fill="Teal" Margin="25 10 25 10"/>
+        <Rectangle Grid.Column="4" Grid.Row="1" Grid.RowSpan="12" Fill="Teal" Margin="25 10 25 10"/>
 
-        <!-- Operacje -->
+        <!-- Operacje na dwóch rejestrach-->
         <TextBlock Grid.Column="5" Grid.Row="1" Grid.ColumnSpan="3" Text="Wybierz rejestry:" FontSize="20" Margin="20 10"/>
         <ComboBox x:Name="firstRegisterList" Grid.Column="5" Grid.Row="3" Width="80" Height="35">
             <ComboBox.ItemTemplate>
@@ -87,12 +89,28 @@
             </ComboBox.ItemTemplate>
         </ComboBox>
 
-        <TextBlock Grid.Column="5" Grid.Row="5" Grid.ColumnSpan="3" Text="Wybierz operacje:" FontSize="20" Width="200px" Margin="20 10"/>
-        <Button x:Name="MOV" Grid.Column="5" Grid.Row="6" Content="MOV" Click="MOV_Operation" Width="55" Height="35"/>
-        <Button x:Name="XCHG" Grid.Column="6" Grid.Row="6" Content="XCHG" Click="XCHG_Operation" Width="55" Height="35"/>
+        <TextBlock Grid.Column="5" Grid.Row="4" Grid.ColumnSpan="3" Text="Wybierz operacje:" FontSize="20" Width="200px" Margin="20 10"/>
+        <Button x:Name="MOV" Grid.Column="5" Grid.Row="5" Content="MOV" Click="MOV_Operation" Width="55" Height="35"/>
+        <Button x:Name="XCHG" Grid.Column="6" Grid.Row="5" Content="XCHG" Click="XCHG_Operation" Width="55" Height="35"/>
+        
+        <!-- Operacje na pojedyńczym rejestrze -->
+        <TextBlock Grid.Column="5" Grid.Row="7" Grid.ColumnSpan="3" Text="Wybierz rejestr:" FontSize="20" Margin="20 10"/>
+        <ComboBox x:Name="singleRegisterList" Grid.Column="5" Grid.ColumnSpan="2" Grid.Row="8" Width="80" Height="35">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock x:Name="singleRegister" Text="{Binding Name}"/>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
 
+        <TextBlock Grid.Column="5" Grid.Row="9" Grid.ColumnSpan="3" Text="Wybierz operacje:" FontSize="20" Width="200px" Margin="20 10"/>
+        <Button x:Name="INC" Grid.Column="5" Grid.Row="10" Content="INC" Click="INC_Operation" Width="55" Height="35"/>
+        <Button x:Name="DEC" Grid.Column="6" Grid.Row="10" Content="DEC" Click="DEC_Operation" Width="55" Height="35"/>
+        <Button x:Name="NOT" Grid.Column="5" Grid.Row="11" Content="NOT" Click="NOT_Operation" Width="55" Height="35"/>
+        <Button x:Name="NEG" Grid.Column="6" Grid.Row="11" Content="NEG" Click="NEG_Operation" Width="55" Height="35"/>
+        
         <!-- Przerywnik -->
-        <Rectangle Grid.Column="8" Grid.Row="1" Grid.RowSpan="8" Fill="Teal" Margin="25 10 25 10"/>
+        <Rectangle Grid.Column="8" Grid.Row="1" Grid.RowSpan="12" Fill="Teal" Margin="25 10 25 10"/>
 
         <!-- Wyniki rejestrów -->
         <TextBlock Grid.Column="9" Grid.Row="1" Grid.ColumnSpan="3" Margin="50 10 100 10" FontSize="20" Text="Wynik:"/>

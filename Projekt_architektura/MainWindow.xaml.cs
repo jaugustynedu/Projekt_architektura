@@ -1,25 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Projekt_architektura
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    
+
     public partial class MainWindow : Window
     {
         public List<Register> registers = new List<Register>();
@@ -38,6 +28,7 @@ namespace Projekt_architektura
 
             firstRegisterList.ItemsSource = registers;
             secondRegisterList.ItemsSource = registers;
+            singleRegisterList.ItemsSource = registers;
         }
 
         private void MOV_Operation(object sender, RoutedEventArgs e)
@@ -45,7 +36,7 @@ namespace Projekt_architektura
             Register firstReg = (Register)firstRegisterList.SelectedItem;
             Register secondReg = (Register)secondRegisterList.SelectedItem;
 
-            if(firstReg != null && secondReg != null)
+            if (firstReg != null && secondReg != null)
             {
                 object input = FindName("result" + firstReg.Name);
                 TextBlock inputChild = input as TextBlock;
@@ -92,7 +83,7 @@ namespace Projekt_architektura
 
                 object output = FindName("result" + reg.Name);
                 TextBlock outputChild = output as TextBlock;
-                
+
                 if (!String.IsNullOrWhiteSpace(inputChild.Text))
                 {
                     if (Register.HexValidator(inputChild.Text.ToUpper()))
@@ -123,7 +114,7 @@ namespace Projekt_architektura
         }
         public void CLEAR_Operation(object sender, RoutedEventArgs e)
         {
-            foreach(var reg in registers)
+            foreach (var reg in registers)
             {
                 object input = FindName(reg.Name);
                 TextBox inputChild = input as TextBox;
@@ -143,29 +134,126 @@ namespace Projekt_architektura
                 inputChild.Text = Register.RandomHexGenerator();
             }
         }
-    }
-
-    public class Register
-    {
-        public string Name { get; set; }
-        public string Value { get; set; }
-
-        public static bool HexValidator(string input)
+        public void INC_Operation(object sender, RoutedEventArgs e)
         {
-            for (int i = 0; i < input.Length; i++)
+
+            Register singleReg = (Register)singleRegisterList.SelectedItem;
+
+            if (singleReg != null)
             {
-                if (!((input[i] >= '0' && input[i] <= '9') || input[i] >= 'A' && input[i] <= 'F'))
-                {
-                    return false;
-                }
+                object input = FindName("result" + singleReg.Name);
+                TextBlock inputChild = input as TextBlock;
+                int intFromHex = int.Parse(singleReg.Value, System.Globalization.NumberStyles.HexNumber) + 1;
+
+                if(intFromHex == 256)
+                    singleReg.Value = "0";
+                else
+                    singleReg.Value = intFromHex.ToString("X").ToString();
+
+                if (singleReg.Value.Length == 1)
+                    inputChild.Text = "0" + singleReg.Value.ToUpper();
+                else
+                    inputChild.Text = singleReg.Value.ToUpper();
             }
-            return true;
+            else
+            {
+                MessageBox.Show("Wybierz rejestr!");
+            }
         }
-        public static string RandomHexGenerator()
+        public void DEC_Operation(object sender, RoutedEventArgs e)
         {
-            const string chars = "0123456789ABCDEF";
-            var rand = new Random();
-            return new string(Enumerable.Repeat(chars, 2).Select(s => s[rand.Next(s.Length)]).ToArray());
+            Register singleReg = (Register)singleRegisterList.SelectedItem;
+
+            if (singleReg != null)
+            {
+                object input = FindName("result" + singleReg.Name);
+                TextBlock inputChild = input as TextBlock;
+                int intFromHex = int.Parse(singleReg.Value, System.Globalization.NumberStyles.HexNumber) - 1;
+
+                if (intFromHex == -1)
+                    singleReg.Value = "FF";
+                else
+                    singleReg.Value = intFromHex.ToString("X").ToString();
+
+                if (singleReg.Value.Length == 1)
+                    inputChild.Text = "0" + singleReg.Value.ToUpper();
+                else
+                    inputChild.Text = singleReg.Value.ToUpper();
+            }
+            else
+            {
+                MessageBox.Show("Wybierz rejestr!");
+            }
+        }
+        public void NOT_Operation(object sender, RoutedEventArgs e)
+        {
+            Register singleReg = (Register)singleRegisterList.SelectedItem;
+
+            if (singleReg != null)
+            {
+                object input = FindName("result" + singleReg.Name);
+                TextBlock inputChild = input as TextBlock;
+                string binarystring = String.Join(String.Empty, singleReg.Value.Select(c => Convert.ToString(Convert.ToInt32(c.ToString(), 16), 2).PadLeft(4, '0')));
+                string BinaryNot = string.Concat(binarystring.Select(x => x == '0' ? '1' : '0'));
+
+                singleReg.Value = Convert.ToInt32(BinaryNot, 2).ToString("X");
+
+                if (singleReg.Value.Length == 1)
+                    inputChild.Text = "0" + singleReg.Value.ToUpper();
+                else
+                    inputChild.Text = singleReg.Value.ToUpper();
+            }
+            else
+            {
+                MessageBox.Show("Wybierz rejestr!");
+            }
+        }
+        public void NEG_Operation(object sender, RoutedEventArgs e)
+        {
+            Register singleReg = (Register)singleRegisterList.SelectedItem;
+
+            if (singleReg != null)
+            {
+                object input = FindName("result" + singleReg.Name);
+                TextBlock inputChild = input as TextBlock;
+
+                NOT_Operation(sender, e);
+                INC_Operation(sender, e);
+                MessageBox.Show(singleReg.Value);
+
+                if (singleReg.Value.Length == 1)
+                    inputChild.Text = "0" + singleReg.Value.ToUpper();
+                else
+                    inputChild.Text = singleReg.Value.ToUpper();
+            }
+            else
+            {
+                MessageBox.Show("Wybierz rejestr!");
+            }
+        }
+
+        public class Register
+        {
+            public string Name { get; set; }
+            public string Value { get; set; }
+
+            public static bool HexValidator(string input)
+            {
+                for (int i = 0; i < input.Length; i++)
+                {
+                    if (!((input[i] >= '0' && input[i] <= '9') || input[i] >= 'A' && input[i] <= 'F'))
+                    {
+                        return false;
+                    }
+                }
+                return true;
+            }
+            public static string RandomHexGenerator()
+            {
+                const string chars = "0123456789ABCDEF";
+                var rand = new Random();
+                return new string(Enumerable.Repeat(chars, 2).Select(s => s[rand.Next(s.Length)]).ToArray());
+            }
         }
     }
 }
