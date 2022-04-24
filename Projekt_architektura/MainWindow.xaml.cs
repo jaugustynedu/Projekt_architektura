@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Text;
 
 namespace Projekt_architektura
 {
@@ -72,8 +73,221 @@ namespace Projekt_architektura
             {
                 MessageBox.Show("Wybierz oba rejestry!");
             }
-
         }
+
+
+        private void AND_Operation(object sender, RoutedEventArgs e)
+        {
+            Register firstReg = (Register)firstRegisterList.SelectedItem;
+            Register secondReg = (Register)secondRegisterList.SelectedItem;
+
+            if (firstReg != null && secondReg != null)
+            {
+                object firstOutput = FindName("result" + firstReg.Name);
+                object secondOutput = FindName("result" + secondReg.Name);
+                TextBlock firstOutputChild = firstOutput as TextBlock;
+                TextBlock secondOutputChild = secondOutput as TextBlock;
+
+                var firstRegBinary = String.Join(String.Empty, firstReg.Value.Select(c => Convert.ToString(Convert.ToInt32(c.ToString(), 16), 2).PadLeft(4, '0')));
+                var secondRegBinary = String.Join(String.Empty, secondReg.Value.Select(c => Convert.ToString(Convert.ToInt32(c.ToString(), 16), 2).PadLeft(4, '0')));
+                var result = new StringBuilder();
+
+                for (int i = 0; i < firstRegBinary.Length; i++)
+                {
+                    if (firstRegBinary[i] == '1' && secondRegBinary[i] == '1')
+                        result.Append("1");
+                    else
+                        result.Append("0");
+                }
+
+                var resultHex = Convert.ToInt32(result.ToString(), 2).ToString("X");
+                firstReg.Value = resultHex;
+
+                if (resultHex.Length == 1)
+                {
+                    firstOutputChild.Text = "0" + resultHex.ToUpper();
+                    firstReg.Value = "0" + resultHex.ToUpper();
+                }
+                else 
+                { 
+                    firstOutputChild.Text = resultHex.ToUpper();
+                    firstReg.Value = resultHex.ToUpper();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Wybierz oba rejestry!");
+
+            }
+        }
+        private void OR_Operation(object sender, RoutedEventArgs e)
+        {
+            Register firstReg = (Register)firstRegisterList.SelectedItem;
+            Register secondReg = (Register)secondRegisterList.SelectedItem;
+
+            if (firstReg != null && secondReg != null)
+            {
+                object firstOutput = FindName("result" + firstReg.Name);
+                object secondOutput = FindName("result" + secondReg.Name);
+                TextBlock firstOutputChild = firstOutput as TextBlock;
+                TextBlock secondOutputChild = secondOutput as TextBlock;
+
+                var firstRegBinary = String.Join(String.Empty, firstReg.Value.Select(c => Convert.ToString(Convert.ToInt32(c.ToString(), 16), 2).PadLeft(4, '0')));
+                var secondRegBinary = String.Join(String.Empty, secondReg.Value.Select(c => Convert.ToString(Convert.ToInt32(c.ToString(), 16), 2).PadLeft(4, '0')));
+                var result = new StringBuilder();
+
+                for (int i = 0; i < firstRegBinary.Length; i++)
+                {
+                    if (!(firstRegBinary[i] == '0' && secondRegBinary[i] == '0'))
+                        result.Append("1");
+                    else
+                        result.Append("0");
+                }
+
+                var resultHex = Convert.ToInt32(result.ToString(), 2).ToString("X");
+                firstReg.Value = resultHex;
+
+                if (resultHex.Length == 1)
+                {
+                    firstOutputChild.Text = "0" + resultHex.ToUpper();
+                    firstReg.Value = "0" + resultHex.ToUpper();
+                }
+                else
+                {
+                    firstOutputChild.Text = resultHex.ToUpper();
+                    firstReg.Value = resultHex.ToUpper();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Wybierz oba rejestry!");
+
+            }
+        }
+        private void XOR_Operation(object sender, RoutedEventArgs e)
+        {
+            Register firstReg = (Register)firstRegisterList.SelectedItem;
+            Register secondReg = (Register)secondRegisterList.SelectedItem;
+
+            if (firstReg != null && secondReg != null)
+            {
+                object firstOutput = FindName("result" + firstReg.Name);
+                object secondOutput = FindName("result" + secondReg.Name);
+                TextBlock firstOutputChild = firstOutput as TextBlock;
+                TextBlock secondOutputChild = secondOutput as TextBlock;
+
+                var firstRegBinary = String.Join(String.Empty, firstReg.Value.Select(c => Convert.ToString(Convert.ToInt32(c.ToString(), 16), 2).PadLeft(4, '0')));
+                var secondRegBinary = String.Join(String.Empty, secondReg.Value.Select(c => Convert.ToString(Convert.ToInt32(c.ToString(), 16), 2).PadLeft(4, '0')));
+                var result = new StringBuilder();
+
+                for (int i = 0; i < firstRegBinary.Length; i++)
+                {
+                    if ((firstRegBinary[i] == '1' && secondRegBinary[i] == '0') || (firstRegBinary[i] == '0' && secondRegBinary[i] == '1'))
+                        result.Append("1");
+                    else
+                        result.Append("0");
+                }
+
+                var resultHex = Convert.ToInt32(result.ToString(), 2).ToString("X");
+                firstReg.Value = resultHex;
+
+                if (resultHex.Length == 1)
+                {
+                    firstOutputChild.Text = "0" + resultHex.ToUpper();
+                    firstReg.Value = "0" + resultHex.ToUpper();
+                }
+                else
+                {
+                    firstOutputChild.Text = resultHex.ToUpper();
+                    firstReg.Value = resultHex.ToUpper();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Wybierz oba rejestry!");
+
+            }
+        }
+        private void ADD_Operation(object sender, RoutedEventArgs e)
+        {
+            Register firstReg = (Register)firstRegisterList.SelectedItem;
+            Register secondReg = (Register)secondRegisterList.SelectedItem;
+
+            if (firstReg != null && secondReg != null)
+            {
+                object firstOutput = FindName("result" + firstReg.Name);
+                object secondOutput = FindName("result" + secondReg.Name);
+                TextBlock firstOutputChild = firstOutput as TextBlock;
+                TextBlock secondOutputChild = secondOutput as TextBlock;
+
+                var firstRegInt = Convert.ToInt32(firstReg.Value, 16);
+                var secondRegInt = Convert.ToInt32(secondReg.Value, 16);
+
+                var result = new StringBuilder();
+
+                int sum = (firstRegInt + secondRegInt) < 255 ? (firstRegInt + secondRegInt) : (firstRegInt + secondRegInt) % 256;
+                result.Append(sum.ToString("x"));
+
+                firstReg.Value = result.ToString();
+
+                if (result.Length == 1)
+                {
+                    firstOutputChild.Text = "0" + result.ToString().ToUpper();
+                    firstReg.Value = "0" + result.ToString().ToUpper();
+                }
+                else
+                {
+                    firstOutputChild.Text = result.ToString().ToUpper();
+                    firstReg.Value = result.ToString().ToUpper();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Wybierz oba rejestry!");
+
+            }
+        }
+        private void SUB_Operation(object sender, RoutedEventArgs e)
+        {
+            Register firstReg = (Register)firstRegisterList.SelectedItem;
+            Register secondReg = (Register)secondRegisterList.SelectedItem;
+
+            if (firstReg != null && secondReg != null)
+            {
+                object firstOutput = FindName("result" + firstReg.Name);
+                object secondOutput = FindName("result" + secondReg.Name);
+                TextBlock firstOutputChild = firstOutput as TextBlock;
+                TextBlock secondOutputChild = secondOutput as TextBlock;
+
+                var firstRegInt = Convert.ToInt32(firstReg.Value, 16);
+                var secondRegInt = Convert.ToInt32(secondReg.Value, 16);
+
+                var result = new StringBuilder();
+
+                int diff = (firstRegInt - secondRegInt) >= 0 ? (firstRegInt - secondRegInt) : 256 + (firstRegInt - secondRegInt); // 256 + diff, because diff has minus sign
+                result.Append(diff.ToString("x"));
+
+                firstReg.Value = result.ToString();
+
+                if (result.Length == 1)
+                {
+                    firstOutputChild.Text = "0" + result.ToString().ToUpper();
+                    firstReg.Value = "0" + result.ToString().ToUpper();
+                }
+                else
+                {
+                    firstOutputChild.Text = result.ToString().ToUpper();
+                    firstReg.Value = result.ToString().ToUpper();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Wybierz oba rejestry!");
+
+            }
+        }
+
+
         private void MOVALL_Operation(object sender, RoutedEventArgs e)
         {
             foreach (var reg in registers)
