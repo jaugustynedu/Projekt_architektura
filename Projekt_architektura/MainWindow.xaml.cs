@@ -14,22 +14,24 @@ namespace Projekt_architektura
     public partial class MainWindow : Window
     {
         public List<Register> registers = new List<Register>();
+        public List<Memory> memoryAdresses = new List<Memory>();
         public MainWindow()
         {
             InitializeComponent();
-
-            registers.Add(new Register { Name = "AH", Value = "00" });
-            registers.Add(new Register { Name = "BH", Value = "00" });
-            registers.Add(new Register { Name = "CH", Value = "00" });
-            registers.Add(new Register { Name = "DH", Value = "00" });
-            registers.Add(new Register { Name = "AL", Value = "00" });
-            registers.Add(new Register { Name = "BL", Value = "00" });
-            registers.Add(new Register { Name = "CL", Value = "00" });
-            registers.Add(new Register { Name = "DL", Value = "00" });
+            var registerNames = new string[] { "AH", "BH", "CH", "DH", "AL", "BL", "CL", "DL" };
+            for (int i = 0; i < registerNames.Length; i++)
+            {
+                registers.Add(new Register { Name = registerNames[i], Value = "00" });
+            }
 
             firstRegisterList.ItemsSource = registers;
             secondRegisterList.ItemsSource = registers;
             singleRegisterList.ItemsSource = registers;
+
+            for (int i = 0; i < 65536; i++) //65 536 => 64Kb
+            {
+                memoryAdresses.Add(new Memory { Name = i.ToString("X"), Value = "0000" });
+            }
         }
 
         private void MOV_Operation(object sender, RoutedEventArgs e)
@@ -445,6 +447,17 @@ namespace Projekt_architektura
                 MessageBox.Show("Wybierz rejestr!");
             }
         }
+        /*public void checkMemoryAddress(object sender, RoutedEventArgs e)
+        {
+            object input = memoryAdressName;
+            TextBlock inputChild = input as TextBlock;
+
+            Memory test = (Memory)memoryAdresses.Select(x => x.Name);
+            var test2 = from entry in memoryAdresses select entry.Name;
+            MessageBox.Show(test.Value);
+            memoryAdresses.First(l => l.Name == "nazwa")
+
+        }*/
 
         public class Register
         {
@@ -468,6 +481,11 @@ namespace Projekt_architektura
                 var rand = new Random();
                 return new string(Enumerable.Repeat(chars, 2).Select(s => s[rand.Next(s.Length)]).ToArray());
             }
+        }
+        public class Memory
+        {
+            public string Name { get; set; }
+            public string Value { get; set; }
         }
     }
 }

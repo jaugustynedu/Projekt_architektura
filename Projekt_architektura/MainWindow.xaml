@@ -1,11 +1,10 @@
 ﻿<Window x:Class="Projekt_architektura.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Projekt_architektura"
         mc:Ignorable="d" FontSize="18"
-        Title="Symulator INTEL 8086" Height="720" Width="1280">
+        Title="Symulator INTEL 8086" Height="960" Width="1280">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20"/>
@@ -31,7 +30,13 @@
             <RowDefinition Height="20"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="40"/>
-            <RowDefinition Height="50"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -147,6 +152,14 @@
         <TextBlock Grid.Column="13" Grid.Row="7" Text="D" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
         <TextBlock x:Name="resultDH" Grid.Column="14" Grid.Row="7" Text="00" VerticalAlignment="Center" HorizontalAlignment="Center"/>
         <TextBlock x:Name="resultDL" Grid.Column="15" Grid.Row="7" Text="00" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+
+        <!-- Przerywnik horyzontalnie -->
+        <!--<Rectangle Grid.Column="1" Grid.Row="13" Grid.ColumnSpan="16" Fill="Teal" Margin="25 10 25 10" Height="10px"/>
+        <TextBlock Grid.Column="1" Grid.Row="17" Height="30px"/> --><!--empty space--><!--
+        <TextBlock x:Name="memoryAdressText" Grid.Column="13" Grid.Row="18" Grid.ColumnSpan="2" Text="Memory Address" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" Height="40"/>
+        <TextBox x:Name="memoryAdressName" Grid.Column="13" Grid.Row="19" Grid.ColumnSpan="1" MaxLength="4" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="AliceBlue" Width="70" Height="35" Margin="10"/>
+        <Button x:Name="checkMemory" Grid.Column="14" Grid.Row="19" Grid.ColumnSpan="1" Content=">>>" Click="checkMemoryAddress" Width="50" Height="25" Margin="15"/>
+        <TextBlock x:Name="memoryAdressValue" Grid.Column="15" Grid.Row="19" Grid.ColumnSpan="1" Text="" Background="AliceBlue" Width="70" Height="35" Margin="10"/>-->
 
 
     </Grid>
